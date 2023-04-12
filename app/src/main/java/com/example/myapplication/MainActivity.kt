@@ -33,6 +33,7 @@ import com.example.myapplication.ui.ArtView
 import com.example.myapplication.ui.theme.MyApplicationTheme
 import com.example.myapplication.study.presenter.ArtSpaceUiState.ChangeArt
 import com.example.myapplication.study.presenter.ArtSpaceUiState.Loading
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -51,6 +52,10 @@ class MainActivity : ComponentActivity() {
                     .onEach {
                         Log.e("smaohao" , "onCreate state $it")
                         uiState = it
+                        when (it) {
+                            is Loading -> { delay(3000) }
+                            else -> {}
+                        }
                     }
                     .collect()
             }

@@ -37,14 +37,6 @@ class ArtSpaceViewModel : ViewModel() {
         initialValue = Loading,
         started = SharingStarted.WhileSubscribed(5_000)
     )
-//    val uiState: StateFlow<ArtSpaceUiState> = data.map {
-//        delay(3000)
-//        Init(it[0])
-//    }.stateIn(
-//        scope = viewModelScope,
-//        initialValue = Loading,
-//        started = SharingStarted.WhileSubscribed(5_000)
-//    )
 
     fun getArt(): List<Art> {
         return arrArt
