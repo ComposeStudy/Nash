@@ -1,6 +1,5 @@
-package com.example.myapplication.ui
+package com.example.myapplication.study.artspace
 
-import android.R
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -8,45 +7,45 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.myapplication.study.presenter.Art
-import com.example.myapplication.study.presenter.ArtSpaceUiState
-import com.example.myapplication.study.presenter.ArtSpaceUiState.ChangeArt
-import com.example.myapplication.study.presenter.ArtSpaceUiState.Loading
-import com.example.myapplication.ui.theme.MyApplicationTheme
+import com.example.myapplication.study.artspace.theme.ArtSpaceTheme
+import com.example.myapplication.study.artspace.presenter.Art
+import com.example.myapplication.study.artspace.presenter.ArtSpaceUiState.ChangeArt
+import com.example.myapplication.study.artspace.presenter.ArtSpaceUiState.Loading
+import com.example.myapplication.study.artspace.presenter.ArtSpaceViewModel
 
 @Composable
-fun ArtView(leftClick: () -> Unit, rightClick: () -> Unit, stateArtSrc: ArtSpaceUiState) {
-
-//    Log.e("smaohao", "ArtView state $stateArtSrc")
-    when (stateArtSrc) {
-        is Loading -> {
-            ArtLoadingView()
+fun ArtSpaceMainView(artSpaceViewModel: ArtSpaceViewModel) {
+    val stateArtSrc = artSpaceViewModel._artState.collectAsState().value
+    Log.e("samohao", "ArtSpaceMainView state = $stateArtSrc")
+    ArtSpaceTheme {
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.background
+        ) {
+            when (stateArtSrc) {
+                is Loading -> {
+                    ArtLoadingView()
+                    artSpaceViewModel.getArt()
+                }
+                is ChangeArt -> ArtView(
+                    leftClick = { artSpaceViewModel.eventHandler(left = true) },
+                    rightClick = { artSpaceViewModel.eventHandler(left = false) },
+                    artData = stateArtSrc.artData
+                )
+            }
         }
-//            is Init -> ArtMainView(
-//                leftClick = leftClick,
-//                rightClick = rightClick,
-//                artData = stateArtSrc.artData
-//            )
-        is ChangeArt -> ArtMainView(
-            leftClick = leftClick,
-            rightClick = rightClick,
-            artData = stateArtSrc.artData
-        )
     }
 }
 
@@ -58,14 +57,12 @@ fun ArtLoadingView() {
 }
 
 @Composable
-fun ArtMainView(leftClick: () -> Unit, rightClick: () -> Unit, artData: Art) {
-//        var imageSrc = remember { mutableStateOf(R.drawable.image1) }
+fun ArtView(leftClick: () -> Unit, rightClick: () -> Unit, artData: Art) {
     val sizeSpacer = 50.dp
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(horizontal = 20.dp, vertical = 20.dp)
-//            .background(color = Color.White)
     ) {
         Spacer(
             modifier = Modifier
@@ -75,10 +72,6 @@ fun ArtMainView(leftClick: () -> Unit, rightClick: () -> Unit, artData: Art) {
             modifier = Modifier
                 .fillMaxSize()
                 .weight(weight = 1.0f, fill = true)
-//                    .background(
-//                        color = colorResource(id = android.R.color.holo_red_dark),
-//                        shape = RectangleShape
-//                    )
         ) {
             Surface(
                 modifier = Modifier
@@ -86,7 +79,7 @@ fun ArtMainView(leftClick: () -> Unit, rightClick: () -> Unit, artData: Art) {
                     .align(Alignment.Center)
                     .border(width = 2.dp, color = Color.Black, shape = RectangleShape)
                     .background(
-                        color = colorResource(id = R.color.holo_green_dark),
+                        color = Color.Green,
 //                            shape = RectangleShape
                     ),
 //                        .shadow(elevation = 5.dp),
