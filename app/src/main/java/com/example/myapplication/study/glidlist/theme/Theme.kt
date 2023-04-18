@@ -13,13 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.myapplication.study.affirmationlist.theme
+package com.example.myapplication.study.glidlist.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
-import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 
 private val DarkColorPalette = darkColorScheme(

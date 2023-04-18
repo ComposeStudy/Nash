@@ -9,8 +9,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.example.myapplication.study.affirmationlist.AffirmationList
+import androidx.compose.ui.unit.sp
+import com.example.myapplication.study.glidlist.GridMainView
 import com.example.myapplication.study.artspace.ArtSpaceMainView
 import com.example.myapplication.study.artspace.presenter.ArtSpaceViewModel
 
@@ -27,7 +29,7 @@ fun MainView(mainViewModel: MainViewModel, artSpaceViewModel: ArtSpaceViewModel)
             ArtSpaceMainView(artSpaceViewModel)
         }
         is DetailPage.AffirmationPage -> {
-            AffirmationList()
+            GridMainView()
         }
     }
 }
@@ -41,18 +43,20 @@ fun MainPage(mainViewModel: MainViewModel) {
     ) {
         TextMenu("Art Space", clickMenu = { mainViewModel.selectPage(DetailPage.ArtSpacePage) })
         Spacer(modifier = Modifier.height(30.dp))
-        TextMenu("Affirmation", clickMenu = { mainViewModel.selectPage(DetailPage.AffirmationPage) })
+        TextMenu("Glid List", clickMenu = { mainViewModel.selectPage(DetailPage.AffirmationPage) })
         Spacer(modifier = Modifier.height(20.dp))
     }
 }
 
 @Composable
 fun TextMenu(menu: String, clickMenu: () -> Unit) {
-    Text(text = menu, modifier = Modifier
-        .fillMaxWidth()
-        .height(50.dp)
-        .background(color = Color.Green)
-        .clickable(onClick = clickMenu),
-        color = Color.White
+    Text(
+        text = menu, fontSize = 20.sp, modifier = Modifier
+            .fillMaxWidth()
+            .height(50.dp)
+            .background(color = Color.Green)
+            .clickable(onClick = clickMenu),
+        color = Color.White,
+        textAlign = TextAlign.Center
     )
 }

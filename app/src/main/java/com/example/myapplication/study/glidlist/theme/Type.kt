@@ -1,4 +1,4 @@
-package com.example.myapplication.study.affirmationlist.theme
+package com.example.myapplication.study.glidlist.theme
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Typography
