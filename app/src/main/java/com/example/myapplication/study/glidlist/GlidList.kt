@@ -33,15 +33,15 @@ fun GridRow() {
 //    }
 
     Row(modifier = Modifier.padding(5.dp), horizontalArrangement = Arrangement.spacedBy(5.dp)) {
-        GridItem(1,1,1)
-        GridItem(1,1,1)
+        GridItem(1,1,1, Modifier.weight(1f))
+        GridItem(1, 1, 1, Modifier.weight(1f))
     }
 
 }
 
 @Composable
-fun GridItem(imageId: Int, stringId: Int, count: Int) {
-    Surface(shadowElevation = 8.dp, shape = RoundedCornerShape(8.dp)) {
+fun GridItem(imageId: Int, stringId: Int, count: Int, weight: Modifier) {
+    Surface(shadowElevation = 8.dp, shape = RoundedCornerShape(8.dp), modifier = weight) {
         Box {
             Image(
                 modifier = Modifier

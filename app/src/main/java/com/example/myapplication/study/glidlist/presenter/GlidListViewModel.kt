@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel
 import com.example.myapplication.R
 import kotlinx.coroutines.flow.MutableStateFlow
 
-class affirmationViewModel: ViewModel() {
-    val _affrimationState = MutableStateFlow(AffirmationState.Loading)
-    fun getAffirmatinoList() {
+class GlidListViewModel: ViewModel() {
+    val _glidListState = MutableStateFlow(AffirmationState.Loading)
+    fun getGlidList() {
         val topics = listOf(
             Topic(R.string.architecture, 58, R.drawable.architecture),
             Topic(R.string.crafts, 121, R.drawable.crafts),
