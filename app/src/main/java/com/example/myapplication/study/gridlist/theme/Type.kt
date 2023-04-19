@@ -1,8 +1,6 @@
-package com.example.myapplication.study.glidlist.theme
+package com.example.myapplication.study.gridlist.theme
 
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Typography
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -15,9 +13,3 @@ val Typography = Typography(
         fontSize = 16.sp
     )
 )
-
-
-@Composable
-fun getTypography(): Typography {
-    return MaterialTheme.typography
-}

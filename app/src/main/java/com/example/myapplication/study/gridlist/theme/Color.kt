@@ -1,4 +1,4 @@
-package com.example.myapplication.study.glidlist.theme
+package com.example.myapplication.study.gridlist.theme
 
 import androidx.compose.ui.graphics.Color
 

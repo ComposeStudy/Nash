@@ -6,16 +6,14 @@ import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.runtime.*
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import com.example.myapplication.study.artspace.presenter.ArtSpaceViewModel
-import kotlinx.coroutines.launch
+import com.example.myapplication.study.gridlist.presenter.GridListViewModel
 
 class MainActivity : ComponentActivity() {
 
     private val mainViewModel: MainViewModel by viewModels()
     private val artViewModel: ArtSpaceViewModel by viewModels()
+    private val gridListViewModel: GridListViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +42,6 @@ class MainActivity : ComponentActivity() {
     @Preview(showBackground = true)
     @Composable
     fun DefaultPreview() {
-        MainView(mainViewModel = mainViewModel, artSpaceViewModel = artViewModel)
+        MainView(mainViewModel = mainViewModel, artSpaceViewModel = artViewModel, gridListViewModel = gridListViewModel)
     }
 }

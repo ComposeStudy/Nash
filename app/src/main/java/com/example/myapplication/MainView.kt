@@ -12,14 +12,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.myapplication.study.glidlist.GridMainView
+import com.example.myapplication.study.gridlist.GridMainView
 import com.example.myapplication.study.artspace.ArtSpaceMainView
 import com.example.myapplication.study.artspace.presenter.ArtSpaceViewModel
+import com.example.myapplication.study.gridlist.presenter.GridListViewModel
 
 
 @Composable
-fun MainView(mainViewModel: MainViewModel, artSpaceViewModel: ArtSpaceViewModel) {
-    val selectedPage = mainViewModel._selectPage.collectAsState().value
+fun MainView(
+    mainViewModel: MainViewModel,
+    artSpaceViewModel: ArtSpaceViewModel,
+    gridListViewModel: GridListViewModel
+) {
+    val selectedPage = mainViewModel.uiState.collectAsState().value
     Log.e("samohao", "MainView state = $selectedPage")
     when (selectedPage) {
         is DetailPage.MainPage -> {
@@ -29,7 +34,10 @@ fun MainView(mainViewModel: MainViewModel, artSpaceViewModel: ArtSpaceViewModel)
             ArtSpaceMainView(artSpaceViewModel)
         }
         is DetailPage.AffirmationPage -> {
-            GridMainView()
+            GridMainView(gridListViewModel) {
+                Log.e("samohao", "MainView backpress")
+                mainViewModel.goMainPage()
+            }
         }
     }
 }
