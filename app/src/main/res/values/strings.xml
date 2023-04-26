@@ -15,4 +15,27 @@
     <string name="painting">Painting</string>
     <string name="photography">Photography</string>
     <string name="tech">Tech</string>
+
+    <string name="days_string_1">Tech</string>
+    <string name="days_string_2">Tech</string>
+    <string name="days_string_3">Tech</string>
+    <string name="days_string_4">Tech</string>
+    <string name="days_string_5">Tech</string>
+    <string name="days_string_6">Tech</string>
+    <string name="days_string_7">Tech</string>
+    <string name="days_string_8">Tech</string>
+    <string name="days_string_9">Tech</string>
+    <string name="days_string_10">Tech</string>
+
+    <string name="days_string_ext_1">Tech</string>
+    <string name="days_string_ext_2">Tech</string>
+    <string name="days_string_ext_3">Tech</string>
+    <string name="days_string_ext_4">Tech</string>
+    <string name="days_string_ext_5">Tech</string>
+    <string name="days_string_ext_6">Tech</string>
+    <string name="days_string_ext_7">Tech</string>
+    <string name="days_string_ext_8">Tech</string>
+    <string name="days_string_ext_9">Tech</string>
+    <string name="days_string_ext_10">Tech</string>
+
 </resources>

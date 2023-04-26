@@ -14,15 +14,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.myapplication.study.gridlist.GridMainView
 import com.example.myapplication.study.artspace.ArtSpaceMainView
-import com.example.myapplication.study.artspace.presenter.ArtSpaceViewModel
-import com.example.myapplication.study.gridlist.presenter.GridListViewModel
+import com.example.myapplication.study.daysofwellness.DaysMain
 
 
 @Composable
 fun MainView(
-    mainViewModel: MainViewModel,
-    artSpaceViewModel: ArtSpaceViewModel,
-    gridListViewModel: GridListViewModel
+    mainViewModel: MainViewModel
 ) {
     val selectedPage = mainViewModel.uiState.collectAsState().value
     Log.e("samohao", "MainView state = $selectedPage")
@@ -31,10 +28,16 @@ fun MainView(
             MainPage(mainViewModel)
         }
         is DetailPage.ArtSpacePage -> {
-            ArtSpaceMainView(artSpaceViewModel)
+            ArtSpaceMainView(mainViewModel.artViewModel)
         }
-        is DetailPage.AffirmationPage -> {
-            GridMainView(gridListViewModel) {
+        is DetailPage.GridListPage -> {
+            GridMainView(mainViewModel.gridListViewModel) {
+                Log.e("samohao", "MainView backpress")
+                mainViewModel.goMainPage()
+            }
+        }
+        is DetailPage.DaysListPage -> {
+            DaysMain(mainViewModel.daysOfWellnessViewModel) {
                 Log.e("samohao", "MainView backpress")
                 mainViewModel.goMainPage()
             }
@@ -49,10 +52,12 @@ fun MainPage(mainViewModel: MainViewModel) {
             .fillMaxSize()
             .padding(20.dp)
     ) {
+        TextMenu("30 Days Of Wellness", clickMenu = { mainViewModel.selectPage(DetailPage.DaysListPage) })
+        Spacer(modifier = Modifier.height(20.dp))
+        TextMenu("Glid List", clickMenu = { mainViewModel.selectPage(DetailPage.GridListPage) })
+        Spacer(modifier = Modifier.height(20.dp))
         TextMenu("Art Space", clickMenu = { mainViewModel.selectPage(DetailPage.ArtSpacePage) })
         Spacer(modifier = Modifier.height(30.dp))
-        TextMenu("Glid List", clickMenu = { mainViewModel.selectPage(DetailPage.AffirmationPage) })
-        Spacer(modifier = Modifier.height(20.dp))
     }
 }
 

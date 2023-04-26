@@ -88,7 +88,7 @@ fun GridItem(imageId: Int, stringId: Int, count: Int) {
 
                 Icon(
                     modifier = Modifier.size(12.dp),
-                    painter = painterResource(id = R.drawable.image1),
+                    painter = painterResource(id = R.drawable.art_image1),
                     contentDescription = "icon"
                 )
 
