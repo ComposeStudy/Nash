@@ -43,7 +43,7 @@ fun DaysTopAppBar() {
     CenterAlignedTopAppBar(title = {
         Text(
             modifier = Modifier
-                .height(40.dp),
+                .height(50.dp),
             text = "30 Days Of Wellness",
             style = Typography.titleLarge
         )
@@ -100,6 +100,7 @@ fun DaysItemView(daysItem: DaysItem, index: Int) {
             text = stringResource(id = daysItem.textId),
             style = Typography.bodyLarge
         )
+        Spacer(modifier = Modifier.height(10.dp))
         Image(
             modifier = Modifier
                 .fillMaxWidth()
@@ -112,9 +113,8 @@ fun DaysItemView(daysItem: DaysItem, index: Int) {
             visible = clickItem.value, modifier = Modifier
                 .fillMaxWidth()
         ) {
-            Spacer(modifier = Modifier.height(10.dp))
             Text(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().padding(top = 10.dp),
                 text = stringResource(id = daysItem.textExtId),
                 style = Typography.bodyMedium
             )
