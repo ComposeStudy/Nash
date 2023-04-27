@@ -6,6 +6,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
@@ -29,6 +30,15 @@ private val DarkColorScheme = darkColorScheme(
     secondary = Grey700
 )
 
+//private val DarkColorScheme = darkColorScheme(
+//    background = Color.Red,
+//    surface = Color.Red,
+//    onSurface = Color.Red,
+//    primary = Color.Red,
+//    onPrimary = Color.Red,
+//    secondary = Color.Red
+//)
+
 @Composable
 fun DaysOfWellnessTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
@@ -36,10 +46,10 @@ fun DaysOfWellnessTheme(
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
+//        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+//            val context = LocalContext.current
+//            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+//        }
         darkTheme -> DarkColorScheme
         else -> LightColorScheme
     }
@@ -49,6 +59,7 @@ fun DaysOfWellnessTheme(
         SideEffect {
             val window = (view.context as Activity).window
             window.statusBarColor = colorScheme.primary.toArgb()
+//            window.statusBarColor = Color.Red.toArgb()
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
 //            ViewCompat.getWindowInsetsController(view)?.isAppearanceLightStatusBars = darkTheme
         }

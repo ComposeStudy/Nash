@@ -16,26 +16,26 @@
     <string name="photography">Photography</string>
     <string name="tech">Tech</string>
 
-    <string name="days_string_1">Tech</string>
-    <string name="days_string_2">Tech</string>
-    <string name="days_string_3">Tech</string>
-    <string name="days_string_4">Tech</string>
-    <string name="days_string_5">Tech</string>
-    <string name="days_string_6">Tech</string>
-    <string name="days_string_7">Tech</string>
-    <string name="days_string_8">Tech</string>
-    <string name="days_string_9">Tech</string>
-    <string name="days_string_10">Tech</string>
+    <string name="days_string_1">레오는 왜 현술 조 가 되었나</string>
+    <string name="days_string_2">아리아와 아리야는 어떻게 다른가</string>
+    <string name="days_string_3">필립 방송할때 친구들 난입해서 부르는 이름은?</string>
+    <string name="days_string_4">소녀 장사는 어떻게 67kg 데드리프트를 해냈나?</string>
+    <string name="days_string_5">사이드백은 어떤 형태로 뛰어야 하는가</string>
+    <string name="days_string_6">합리화는 정신건강에 얼마나 도움이 되나</string>
+    <string name="days_string_7">필립 방송할때 친구들 난입해서 부르는 이름은?</string>
+    <string name="days_string_8">합리화는 정신건강에 얼마나 도움이 되나</string>
+    <string name="days_string_9">합리화는 정신건강에 얼마나 도움이 되나</string>
+    <string name="days_string_10">합리화는 정신건강에 얼마나 도움이 되나</string>
 
-    <string name="days_string_ext_1">Tech</string>
-    <string name="days_string_ext_2">Tech</string>
-    <string name="days_string_ext_3">Tech</string>
-    <string name="days_string_ext_4">Tech</string>
-    <string name="days_string_ext_5">Tech</string>
-    <string name="days_string_ext_6">Tech</string>
-    <string name="days_string_ext_7">Tech</string>
-    <string name="days_string_ext_8">Tech</string>
-    <string name="days_string_ext_9">Tech</string>
-    <string name="days_string_ext_10">Tech</string>
+    <string name="days_string_ext_1">Method boolean androidx.compose.runtime.snapshots.SnapshotStateList.conditionalUpdate(kotlin.jvm.functions.Function1) failed lock verification and will run slower</string>
+    <string name="days_string_ext_2">Method boolean androidx.compose.runtime.snapshots.SnapshotStateList.conditionalUpdate(kotlin.jvm.functions.Function1) failed lock verification and will run slower</string>
+    <string name="days_string_ext_3">Method boolean androidx.compose.runtime.snapshots.SnapshotStateList.conditionalUpdate(kotlin.jvm.functions.Function1) failed lock verification and will run slower</string>
+    <string name="days_string_ext_4">Method boolean androidx.compose.runtime.snapshots.SnapshotStateList.conditionalUpdate(kotlin.jvm.functions.Function1) failed lock verification and will run slower</string>
+    <string name="days_string_ext_5">Method boolean androidx.compose.runtime.snapshots.SnapshotStateList.conditionalUpdate(kotlin.jvm.functions.Function1) failed lock verification and will run slower</string>
+    <string name="days_string_ext_6">Method boolean androidx.compose.runtime.snapshots.SnapshotStateList.conditionalUpdate(kotlin.jvm.functions.Function1) failed lock verification and will run slower</string>
+    <string name="days_string_ext_7">Method boolean androidx.compose.runtime.snapshots.SnapshotStateList.conditionalUpdate(kotlin.jvm.functions.Function1) failed lock verification and will run slower</string>
+    <string name="days_string_ext_8">Method boolean androidx.compose.runtime.snapshots.SnapshotStateList.conditionalUpdate(kotlin.jvm.functions.Function1) failed lock verification and will run slower</string>
+    <string name="days_string_ext_9">Method boolean androidx.compose.runtime.snapshots.SnapshotStateList.conditionalUpdate(kotlin.jvm.functions.Function1) failed lock verification and will run slower</string>
+    <string name="days_string_ext_10">Method boolean androidx.compose.runtime.snapshots.SnapshotStateList.conditionalUpdate(kotlin.jvm.functions.Function1) failed lock verification and will run slower</string>
 
 </resources>

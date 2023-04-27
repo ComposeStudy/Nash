@@ -1,9 +1,11 @@
 package com.example.myapplication.study.daysofwellness.theme
 
 import androidx.compose.material3.Typography
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.example.myapplication.R
@@ -46,24 +48,34 @@ val Montserrat = FontFamily(
 )
 
 val Typography = Typography(
-    displayLarge = TextStyle(
+    titleLarge = TextStyle(
         fontFamily = AbrilFatface,
         fontWeight = FontWeight.Normal,
         fontSize = 35.sp
     ),
-    displayMedium = TextStyle(
+    labelLarge = TextStyle(
         fontFamily = Montserrat,
         fontWeight = FontWeight.Bold,
-        fontSize = 20.sp
-    ),
-    labelSmall = TextStyle(
-        fontFamily = Montserrat,
-        fontWeight = FontWeight.Bold,
-        fontSize = 14.sp
+        fontSize = 20.sp,
+        lineHeight = 24.sp,
+        letterSpacing = 0.5.sp,
+        color = Grey300,
+        fontStyle = FontStyle.Italic
     ),
     bodyLarge = TextStyle(
         fontFamily = Montserrat,
-        fontWeight = FontWeight.Normal,
-        fontSize = 14.sp
+        fontWeight = FontWeight.Black,
+        fontSize = 18.sp,
+        lineHeight = 20.sp,
+        letterSpacing = 0.5.sp,
+        fontStyle = FontStyle.Italic
+    ),
+    bodyMedium = TextStyle(
+        fontFamily = Montserrat,
+        fontWeight = FontWeight.Black,
+        fontSize = 16.sp,
+        lineHeight = 24.sp,
+        letterSpacing = 0.5.sp,
+        fontStyle = FontStyle.Italic
     )
 )

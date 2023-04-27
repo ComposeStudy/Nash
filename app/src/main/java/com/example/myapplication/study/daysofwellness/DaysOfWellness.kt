@@ -1,10 +1,12 @@
 package com.example.myapplication.study.daysofwellness
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -41,10 +43,9 @@ fun DaysTopAppBar() {
     CenterAlignedTopAppBar(title = {
         Text(
             modifier = Modifier
-                .fillMaxWidth()
                 .height(40.dp),
             text = "30 Days Of Wellness",
-            style = Typography.displayLarge
+            style = Typography.titleLarge
         )
     })
 }
@@ -52,23 +53,71 @@ fun DaysTopAppBar() {
 @Composable
 fun DaysContent(padding: PaddingValues, daysViewModel: DaysOfWellnessViewModel) {
     LazyColumn(contentPadding = padding) {
-        items(daysViewModel.getDays()) { daysItem ->
-            DaysItemView(daysItem = daysItem)
+        itemsIndexed(items = daysViewModel.getDays()) { index, daysItem ->
+            DaysItemRow(daysItem = daysItem, index)
         }
     }
 }
 
 @Composable
-fun DaysItemView(daysItem: DaysItem) {
-    Column(modifier = Modifier
-        .padding(start = 10.dp, end = 10.dp, top = 10.dp)
-        .fillMaxWidth()) {
+fun DaysItemRow(daysItem: DaysItem, index: Int) {
+//    Card(
+//        modifier = Modifier
+//            .padding(start = 10.dp, end = 10.dp, top = 10.dp)
+//            .fillMaxWidth(), elevation = CardDefaults.cardElevation(defaultElevation = 5.dp)
+//    ) {
+//        DaysItemView(daysItem = daysItem)
+//    }
+
+    Surface(
+        modifier = Modifier
+            .padding(start = 10.dp, end = 10.dp, top = 10.dp)
+            .fillMaxWidth(), shadowElevation = 5.dp
+    ) {
+        DaysItemView(daysItem = daysItem, index)
+    }
+}
+
+@Composable
+fun DaysItemView(daysItem: DaysItem, index: Int) {
+    val clickItem = remember { mutableStateOf(false) }
+    Column(
+        modifier = Modifier
+            .padding(10.dp)
+            .fillMaxWidth()
+    ) {
+        Text(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(30.dp),
+            text = "Day ${index + 1}",
+            style = Typography.labelLarge
+        )
+
+        Text(
+            modifier = Modifier
+                .fillMaxWidth(),
+            text = stringResource(id = daysItem.textId),
+            style = Typography.bodyLarge
+        )
         Image(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable { clickItem.value = !clickItem.value },
             painter = painterResource(id = daysItem.imageId),
             contentDescription = "",
             contentScale = ContentScale.FillWidth
         )
-        Text(modifier = Modifier.fillMaxWidth(), text = stringResource(id = daysItem.textId))
+        AnimatedVisibility(
+            visible = clickItem.value, modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = stringResource(id = daysItem.textExtId),
+                style = Typography.bodyMedium
+            )
+        }
     }
 }
