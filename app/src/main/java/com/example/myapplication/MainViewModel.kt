@@ -3,6 +3,7 @@ package com.example.myapplication
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.study.artspace.presenter.ArtSpaceViewModel
+import com.example.myapplication.study.cupcake.presenter.CupcakeViewModel
 import com.example.myapplication.study.daysofwellness.presenter.DaysOfWellnessViewModel
 import com.example.myapplication.study.gridlist.presenter.GridListViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -11,9 +12,12 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class MainViewModel : ViewModel() {
+//    lateinit var cupcakeViewModel: CupcakeViewModel
+    val cupcakeViewModel by lazy { CupcakeViewModel() }
     lateinit var artViewModel: ArtSpaceViewModel
     lateinit var gridListViewModel: GridListViewModel
     lateinit var daysOfWellnessViewModel: DaysOfWellnessViewModel
+
 
     private var _selectPage: MutableStateFlow<DetailPage> = MutableStateFlow(DetailPage.MainPage)
     val uiState = _selectPage.stateIn(
@@ -27,6 +31,9 @@ class MainViewModel : ViewModel() {
             when (detailPage) {
                 is DetailPage.MainPage -> {
                     _selectPage.emit(DetailPage.MainPage)
+                }
+                is DetailPage.CupcakePage -> {
+                    _selectPage.emit(DetailPage.CupcakePage)
                 }
                 is DetailPage.ArtSpacePage -> {
                     _selectPage.emit(DetailPage.ArtSpacePage)
@@ -59,6 +66,7 @@ class MainViewModel : ViewModel() {
 
 sealed interface DetailPage {
     object MainPage : DetailPage
+    object CupcakePage : DetailPage
     object ArtSpacePage : DetailPage
     object GridListPage : DetailPage
     object DaysListPage : DetailPage

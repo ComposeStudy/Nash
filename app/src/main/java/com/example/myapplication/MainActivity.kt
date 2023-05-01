@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.compose.runtime.*
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.myapplication.study.artspace.presenter.ArtSpaceViewModel
+import com.example.myapplication.study.cupcake.presenter.CupcakeViewModel
 import com.example.myapplication.study.daysofwellness.presenter.DaysOfWellnessViewModel
 import com.example.myapplication.study.gridlist.presenter.GridListViewModel
 
@@ -16,6 +17,7 @@ class MainActivity : ComponentActivity() {
     private val artViewModel: ArtSpaceViewModel by viewModels()
     private val gridListViewModel: GridListViewModel by viewModels()
     private val daysOfWellnessViewModel: DaysOfWellnessViewModel by viewModels()
+    private val cupcakeViewModel: CupcakeViewModel by viewModels()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +49,7 @@ class MainActivity : ComponentActivity() {
         mainViewModel.artViewModel = artViewModel
         mainViewModel.gridListViewModel = gridListViewModel
         mainViewModel.daysOfWellnessViewModel = daysOfWellnessViewModel
+//        mainViewModel.cupcakeViewModel = cupcakeViewModel
     }
 
     @Preview(showBackground = true)

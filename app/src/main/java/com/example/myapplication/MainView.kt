@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.myapplication.study.gridlist.GridMainView
 import com.example.myapplication.study.artspace.ArtSpaceMainView
+import com.example.myapplication.study.cupcake.CupcakeMainView
 import com.example.myapplication.study.daysofwellness.DaysMain
 
 
@@ -26,6 +27,9 @@ fun MainView(
     when (selectedPage) {
         is DetailPage.MainPage -> {
             MainPage(mainViewModel)
+        }
+        is DetailPage.CupcakePage -> {
+            CupcakeMainView(mainViewModel.cupcakeViewModel)
         }
         is DetailPage.ArtSpacePage -> {
             ArtSpaceMainView(mainViewModel.artViewModel)
@@ -52,6 +56,8 @@ fun MainPage(mainViewModel: MainViewModel) {
             .fillMaxSize()
             .padding(20.dp)
     ) {
+        TextMenu("Cupcake", clickMenu = { mainViewModel.selectPage(DetailPage.CupcakePage) })
+        Spacer(modifier = Modifier.height(20.dp))
         TextMenu("30 Days Of Wellness", clickMenu = { mainViewModel.selectPage(DetailPage.DaysListPage) })
         Spacer(modifier = Modifier.height(20.dp))
         TextMenu("Glid List", clickMenu = { mainViewModel.selectPage(DetailPage.GridListPage) })
