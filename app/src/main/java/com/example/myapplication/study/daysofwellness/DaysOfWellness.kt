@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.myapplication.study.daysofwellness.presenter.DaysItem
 import com.example.myapplication.study.daysofwellness.presenter.DaysOfWellnessViewModel
@@ -72,7 +73,8 @@ fun DaysItemRow(daysItem: DaysItem, index: Int) {
     Surface(
         modifier = Modifier
             .padding(start = 10.dp, end = 10.dp, top = 10.dp)
-            .fillMaxWidth(), shadowElevation = 5.dp
+            .fillMaxWidth(),
+        shadowElevation = 5.dp
     ) {
         DaysItemView(daysItem = daysItem, index)
     }
