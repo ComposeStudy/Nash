@@ -17,7 +17,7 @@ private val LightColorScheme = lightColorScheme(
     background = Color.White,
     surface = Color.Black,
 //    onSurface = White,
-//    primary = Grey900,
+    primary = Pink80,
 //    onPrimary = White,
 //    secondary = Grey100
 )
@@ -26,7 +26,7 @@ private val DarkColorScheme = darkColorScheme(
     background = Color.Black,
     surface = Color.White,
 //    onSurface = Grey900,
-//    primary = Grey50,
+    primary = Pink80,
 //    onPrimary = Grey900,
 //    secondary = Grey700
 )
@@ -38,10 +38,10 @@ fun CupcakeTheme(
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
+//        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+//            val context = LocalContext.current
+//            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+//        }
         darkTheme -> DarkColorScheme
         else -> LightColorScheme
     }
@@ -51,7 +51,6 @@ fun CupcakeTheme(
         SideEffect {
             val window = (view.context as Activity).window
             window.statusBarColor = colorScheme.primary.toArgb()
-//            window.statusBarColor = Color.Red.toArgb()
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
 //            ViewCompat.getWindowInsetsController(view)?.isAppearanceLightStatusBars = darkTheme
         }
