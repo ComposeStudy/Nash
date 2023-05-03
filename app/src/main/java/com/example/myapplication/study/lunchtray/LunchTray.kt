@@ -10,9 +10,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.myapplication.study.lunchtray.page.LunchDrinkView
-import com.example.myapplication.study.lunchtray.page.LunchMainView
-import com.example.myapplication.study.lunchtray.page.LunchSideView
+import com.example.myapplication.study.lunchtray.page.*
 import com.example.myapplication.study.lunchtray.presenter.LunchTrayRoute
 import com.example.myapplication.study.lunchtray.presenter.LunchTrayViewModel
 import com.example.myapplication.study.lunchtray.theme.LunchTrayTheme
@@ -42,10 +40,10 @@ fun LunchTrayMainView(lunchTrayViewModel: LunchTrayViewModel, contentPadding: Pa
         startDestination = LunchTrayRoute.Start.name,
         modifier = Modifier.padding(contentPadding)
     ) {
-        composable(route = LunchTrayRoute.Start.name) { LunchMainView(navController, lunchTrayViewModel) }
+        composable(route = LunchTrayRoute.Start.name) { LunchStartView(navController, lunchTrayViewModel) }
         composable(route = LunchTrayRoute.Main.name) { LunchMainView(navController, lunchTrayViewModel) }
         composable(route = LunchTrayRoute.Side.name) { LunchSideView(navController, lunchTrayViewModel) }
         composable(route = LunchTrayRoute.Drink.name) { LunchDrinkView(navController, lunchTrayViewModel) }
-        composable(route = LunchTrayRoute.Purchase.name) { LunchDrinkView(navController, lunchTrayViewModel) }
+        composable(route = LunchTrayRoute.Purchase.name) { LunchPurchaseView(navController, lunchTrayViewModel) }
     }
 }
