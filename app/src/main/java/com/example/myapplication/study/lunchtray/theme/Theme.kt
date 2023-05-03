@@ -18,7 +18,7 @@ private val LightColorScheme = lightColorScheme(
     background = Color.White,
     surface = Color.Black,
 //    onSurface = White,
-    primary = Pink80,
+    primary = Purple40,
 //    onPrimary = White,
 //    secondary = Grey100
 )
@@ -27,13 +27,13 @@ private val DarkColorScheme = darkColorScheme(
     background = Color.Black,
     surface = Color.White,
 //    onSurface = Grey900,
-    primary = Pink80,
+    primary = Purple40,
 //    onPrimary = Grey900,
 //    secondary = Grey700
 )
 
 @Composable
-fun CupcakeTheme(
+fun LunchTrayTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     dynamicColor: Boolean = true,
     content: @Composable () -> Unit
