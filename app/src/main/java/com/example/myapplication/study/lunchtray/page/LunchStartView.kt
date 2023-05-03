@@ -13,7 +13,7 @@ import androidx.navigation.NavController
 import com.example.myapplication.study.lunchtray.presenter.LunchTrayViewModel
 
 @Composable
-fun LunchStartView(navController: NavController, lunchTrayViewModel: LunchTrayViewModel, startClick: () -> Unit) {
+fun LunchStartView(lunchTrayViewModel: LunchTrayViewModel, startClick: () -> Unit) {
     Box {
         Button(
             onClick = startClick,

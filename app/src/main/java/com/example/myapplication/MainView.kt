@@ -16,6 +16,8 @@ import com.example.myapplication.study.gridlist.GridMainView
 import com.example.myapplication.study.artspace.ArtSpaceMainView
 import com.example.myapplication.study.cupcake.CupcakeMainView
 import com.example.myapplication.study.daysofwellness.DaysMain
+import com.example.myapplication.study.lunchtray.LunchTrayMain
+import com.example.myapplication.study.lunchtray.LunchTrayMainView
 
 
 @Composable
@@ -25,26 +27,31 @@ fun MainView(
     val selectedPage = mainViewModel.uiState.collectAsState().value
     Log.e("samohao", "MainView state = $selectedPage")
     when (selectedPage) {
-        is DetailPage.MainPage -> {
-            MainPage(mainViewModel)
+        is DetailPage.LunchTrayPage -> {
+            LunchTrayMain(mainViewModel.lunchTrayViewModel) {
+                mainViewModel.goMainPage()
+            }
         }
         is DetailPage.CupcakePage -> {
-            CupcakeMainView(mainViewModel.cupcakeViewModel)
-        }
-        is DetailPage.ArtSpacePage -> {
-            ArtSpaceMainView(mainViewModel.artViewModel)
+            CupcakeMainView(mainViewModel.cupcakeViewModel) {
+                mainViewModel.goMainPage()
+            }
         }
         is DetailPage.GridListPage -> {
             GridMainView(mainViewModel.gridListViewModel) {
-                Log.e("samohao", "MainView backpress")
                 mainViewModel.goMainPage()
             }
         }
         is DetailPage.DaysListPage -> {
             DaysMain(mainViewModel.daysOfWellnessViewModel) {
-                Log.e("samohao", "MainView backpress")
                 mainViewModel.goMainPage()
             }
+        }
+        is DetailPage.ArtSpacePage -> {
+            ArtSpaceMainView(mainViewModel.artViewModel)
+        }
+        is DetailPage.MainPage -> {
+            MainPage(mainViewModel)
         }
     }
 }
@@ -56,6 +63,8 @@ fun MainPage(mainViewModel: MainViewModel) {
             .fillMaxSize()
             .padding(20.dp)
     ) {
+        TextMenu("LunchTray", clickMenu = { mainViewModel.selectPage(DetailPage.LunchTrayPage) })
+        Spacer(modifier = Modifier.height(20.dp))
         TextMenu("Cupcake", clickMenu = { mainViewModel.selectPage(DetailPage.CupcakePage) })
         Spacer(modifier = Modifier.height(20.dp))
         TextMenu("30 Days Of Wellness", clickMenu = { mainViewModel.selectPage(DetailPage.DaysListPage) })

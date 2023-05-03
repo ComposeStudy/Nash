@@ -6,6 +6,7 @@ import com.example.myapplication.study.artspace.presenter.ArtSpaceViewModel
 import com.example.myapplication.study.cupcake.presenter.CupcakeViewModel
 import com.example.myapplication.study.daysofwellness.presenter.DaysOfWellnessViewModel
 import com.example.myapplication.study.gridlist.presenter.GridListViewModel
+import com.example.myapplication.study.lunchtray.presenter.LunchTrayViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
@@ -13,6 +14,7 @@ import kotlinx.coroutines.launch
 
 class MainViewModel : ViewModel() {
 //    lateinit var cupcakeViewModel: CupcakeViewModel
+    val lunchTrayViewModel by lazy { LunchTrayViewModel() }
     val cupcakeViewModel by lazy { CupcakeViewModel() }
     lateinit var artViewModel: ArtSpaceViewModel
     lateinit var gridListViewModel: GridListViewModel
@@ -29,8 +31,8 @@ class MainViewModel : ViewModel() {
     fun selectPage(detailPage: DetailPage) {
         viewModelScope.launch {
             when (detailPage) {
-                is DetailPage.MainPage -> {
-                    _selectPage.emit(DetailPage.MainPage)
+                is DetailPage.LunchTrayPage -> {
+                    _selectPage.emit(DetailPage.LunchTrayPage)
                 }
                 is DetailPage.CupcakePage -> {
                     _selectPage.emit(DetailPage.CupcakePage)
@@ -43,6 +45,9 @@ class MainViewModel : ViewModel() {
                 }
                 is DetailPage.DaysListPage -> {
                     _selectPage.emit(DetailPage.DaysListPage)
+                }
+                is DetailPage.MainPage -> {
+                    _selectPage.emit(DetailPage.MainPage)
                 }
             }
         }
@@ -65,9 +70,10 @@ class MainViewModel : ViewModel() {
 }
 
 sealed interface DetailPage {
-    object MainPage : DetailPage
+    object LunchTrayPage : DetailPage
     object CupcakePage : DetailPage
     object ArtSpacePage : DetailPage
     object GridListPage : DetailPage
     object DaysListPage : DetailPage
+    object MainPage : DetailPage
 }

@@ -1,5 +1,6 @@
 package com.example.myapplication.study.cupcake
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -9,6 +10,7 @@ import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 //import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -28,7 +30,10 @@ import com.example.myapplication.study.cupcake.theme.CupcakeTheme
 import com.example.myapplication.study.cupcake.theme.Pink80
 
 @Composable
-fun CupcakeMainView(cupcakeViewModel: CupcakeViewModel) {
+fun CupcakeMainView(cupcakeViewModel: CupcakeViewModel, backPress: () -> Unit) {
+    val backHandlingEnable by remember { mutableStateOf(true) }
+    BackHandler(backHandlingEnable, onBack = backPress)
+
     Scaffold(topBar = {
         CupcakeTopBar()
     }) { paddingValue ->

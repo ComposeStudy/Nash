@@ -11,7 +11,7 @@ import com.example.myapplication.study.lunchtray.presenter.LunchTrayRoute
 import com.example.myapplication.study.lunchtray.presenter.LunchTrayViewModel
 
 @Composable
-fun LunchMainView(navController: NavController, lunchTrayViewModel: LunchTrayViewModel) {
+fun LunchMainView(lunchTrayViewModel: LunchTrayViewModel, clickCancelBtn: () -> Unit, clickNextBtn: () -> Unit ) {
     Column(modifier = Modifier.fillMaxSize()) {
         CommonLunchTrayMenuList(
             menuList = lunchTrayViewModel.getMenuList(LunchTrayRoute.Main)
@@ -19,8 +19,8 @@ fun LunchMainView(navController: NavController, lunchTrayViewModel: LunchTrayVie
             lunchTrayViewModel.selectMainMenu(lunchMainMenu)
         }
         CommonLunchTrayFooter(
-            clickCancelBtn = { navController.popBackStack() },
-            clickNextBtn = { navController.navigate(LunchTrayRoute.Side.name) }
+            clickCancelBtn = clickCancelBtn,
+            clickNextBtn = clickNextBtn
         )
     }
 }

@@ -21,7 +21,7 @@ fun LunchPurchaseView(navController: NavController, lunchTrayViewModel: LunchTra
 //            lunchTrayViewModel.selectMainMenu(lunchMainMenu)
 //        }
         CommonLunchTrayFooter(
-            clickCancelBtn = { navController.popBackStack(LunchTrayRoute.) },
+            clickCancelBtn = { navController.popBackStack() },
             clickNextBtn = { navController.navigate(LunchTrayRoute.Side.name) }
         )
     }

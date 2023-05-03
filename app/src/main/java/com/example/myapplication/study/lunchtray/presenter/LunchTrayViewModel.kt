@@ -19,6 +19,7 @@ class LunchTrayViewModel: ViewModel() {
         LunchTrayRoute.Main -> arrMainMenu
         LunchTrayRoute.Side -> arrSideMenu
         LunchTrayRoute.Drink -> arrDrinkMenu
+        else -> { listOf() }
     }
 
     fun selectMainMenu(menuItem: LunchTrayMenuItem) {

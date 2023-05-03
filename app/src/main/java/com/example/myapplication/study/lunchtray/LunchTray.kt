@@ -1,10 +1,14 @@
 package com.example.myapplication.study.lunchtray
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
@@ -16,7 +20,11 @@ import com.example.myapplication.study.lunchtray.presenter.LunchTrayViewModel
 import com.example.myapplication.study.lunchtray.theme.LunchTrayTheme
 
 @Composable
-fun LunchTrayMain(lunchTrayViewModel: LunchTrayViewModel) {
+fun LunchTrayMain(lunchTrayViewModel: LunchTrayViewModel, backPress: () -> Unit) {
+
+    val backHandlingEnable by remember { mutableStateOf(true) }
+    BackHandler(backHandlingEnable, onBack = backPress)
+
     Scaffold(topBar = {
         LunchTrayTopBar()
     }) { padding ->
@@ -40,10 +48,42 @@ fun LunchTrayMainView(lunchTrayViewModel: LunchTrayViewModel, contentPadding: Pa
         startDestination = LunchTrayRoute.Start.name,
         modifier = Modifier.padding(contentPadding)
     ) {
-        composable(route = LunchTrayRoute.Start.name) { LunchStartView(navController, lunchTrayViewModel) }
-        composable(route = LunchTrayRoute.Main.name) { LunchMainView(navController, lunchTrayViewModel) }
-        composable(route = LunchTrayRoute.Side.name) { LunchSideView(navController, lunchTrayViewModel) }
-        composable(route = LunchTrayRoute.Drink.name) { LunchDrinkView(navController, lunchTrayViewModel) }
-        composable(route = LunchTrayRoute.Purchase.name) { LunchPurchaseView(navController, lunchTrayViewModel) }
+        composable(route = LunchTrayRoute.Start.name) {
+            LunchStartView(
+                lunchTrayViewModel,
+                startClick = {
+                    navController.navigate(LunchTrayRoute.Main.name)
+                }
+            )
+        }
+        composable(route = LunchTrayRoute.Main.name) {
+            LunchMainView(
+                lunchTrayViewModel,
+                clickCancelBtn = {
+                    navController.navigate(LunchTrayRoute.Start.name)
+                },
+                clickNextBtn = {
+                    navController.navigate(LunchTrayRoute.Side.name)
+                }
+            )
+        }
+        composable(route = LunchTrayRoute.Side.name) {
+            LunchSideView(
+                navController,
+                lunchTrayViewModel
+            )
+        }
+        composable(route = LunchTrayRoute.Drink.name) {
+            LunchDrinkView(
+                navController,
+                lunchTrayViewModel
+            )
+        }
+        composable(route = LunchTrayRoute.Purchase.name) {
+            LunchPurchaseView(
+                navController,
+                lunchTrayViewModel
+            )
+        }
     }
 }
