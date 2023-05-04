@@ -15,6 +15,8 @@ class LunchTrayViewModel: ViewModel() {
         started = SharingStarted.WhileSubscribed(5000)
     )
 
+    fun getSelectedMenu() = _lunchTrayState.value
+
     fun getMenuList(route: LunchTrayRoute): List<LunchTrayMenuItem> = when (route) {
         LunchTrayRoute.Main -> arrMainMenu
         LunchTrayRoute.Side -> arrSideMenu
@@ -64,29 +66,31 @@ data class LunchTrayData(
 
 data class LunchTrayMenuItem(
     val menu: String = "",
-    val desc: String = ""
+    val desc: String = "",
+    val price: Int = 0,
+    val currency: String = ""
 )
 
 private val arrMainMenu = listOf(
-    LunchTrayMenuItem(menu = "A Main", desc = "Main A Main A Main A Main A"),
-    LunchTrayMenuItem(menu = "B Main", desc = "Main A Main A Main A Main A"),
-    LunchTrayMenuItem(menu = "C Main", desc = "Main A Main A Main A Main A"),
-    LunchTrayMenuItem(menu = "D Main", desc = "Main A Main A Main A Main A"),
-    LunchTrayMenuItem(menu = "E Main", desc = "Main A Main A Main A Main A")
+    LunchTrayMenuItem(menu = "A Main", desc = "Main A Main A Main A Main A", price = 5, currency = "$"),
+    LunchTrayMenuItem(menu = "B Main", desc = "Main A Main A Main A Main A", price = 5, currency = "$"),
+    LunchTrayMenuItem(menu = "C Main", desc = "Main A Main A Main A Main A", price = 5, currency = "$"),
+    LunchTrayMenuItem(menu = "D Main", desc = "Main A Main A Main A Main A", price = 5, currency = "$"),
+    LunchTrayMenuItem(menu = "E Main", desc = "Main A Main A Main A Main A", price = 5, currency = "$")
 )
 
 private val arrSideMenu = listOf(
-    LunchTrayMenuItem(menu = "A Side", desc = "Main A Main A Main A Main A"),
-    LunchTrayMenuItem(menu = "B Side", desc = "Main A Main A Main A Main A"),
-    LunchTrayMenuItem(menu = "C Side", desc = "Main A Main A Main A Main A"),
-    LunchTrayMenuItem(menu = "D Side", desc = "Main A Main A Main A Main A"),
-    LunchTrayMenuItem(menu = "E Side", desc = "Main A Main A Main A Main A")
+    LunchTrayMenuItem(menu = "A Side", desc = "Main A Main A Main A Main A", price = 5, currency = "$"),
+    LunchTrayMenuItem(menu = "B Side", desc = "Main A Main A Main A Main A", price = 5, currency = "$"),
+    LunchTrayMenuItem(menu = "C Side", desc = "Main A Main A Main A Main A", price = 5, currency = "$"),
+    LunchTrayMenuItem(menu = "D Side", desc = "Main A Main A Main A Main A", price = 5, currency = "$"),
+    LunchTrayMenuItem(menu = "E Side", desc = "Main A Main A Main A Main A", price = 5, currency = "$")
 )
 
 private val arrDrinkMenu = listOf(
-    LunchTrayMenuItem(menu = "A Drink", desc = "Main A Main A Main A Main A"),
-    LunchTrayMenuItem(menu = "B Drink", desc = "Main A Main A Main A Main A"),
-    LunchTrayMenuItem(menu = "C Drink", desc = "Main A Main A Main A Main A"),
-    LunchTrayMenuItem(menu = "D Drink", desc = "Main A Main A Main A Main A"),
-    LunchTrayMenuItem(menu = "E Drink", desc = "Main A Main A Main A Main A")
+    LunchTrayMenuItem(menu = "A Drink", desc = "Main A Main A Main A Main A", price = 5, currency = "$"),
+    LunchTrayMenuItem(menu = "B Drink", desc = "Main A Main A Main A Main A", price = 5, currency = "$"),
+    LunchTrayMenuItem(menu = "C Drink", desc = "Main A Main A Main A Main A", price = 5, currency = "$"),
+    LunchTrayMenuItem(menu = "D Drink", desc = "Main A Main A Main A Main A", price = 5, currency = "$"),
+    LunchTrayMenuItem(menu = "E Drink", desc = "Main A Main A Main A Main A", price = 5, currency = "$")
 )

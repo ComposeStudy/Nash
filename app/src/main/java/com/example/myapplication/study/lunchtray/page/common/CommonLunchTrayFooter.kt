@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import com.example.myapplication.study.lunchtray.theme.Purple40
 
 @Composable
-fun CommonLunchTrayFooter(clickCancelBtn: () -> Unit, clickNextBtn: () -> Unit) {
+fun CommonLunchTrayFooter(clickCancelBtn: () -> Unit, clickNextBtn: () -> Unit, rightButtonText: String = "NEXT") {
     Row(
         modifier = Modifier.padding(horizontal = 30.dp),
         horizontalArrangement = Arrangement.spacedBy(20.dp)
@@ -24,7 +24,7 @@ fun CommonLunchTrayFooter(clickCancelBtn: () -> Unit, clickNextBtn: () -> Unit) 
             Text(text = "CANCEL")
         }
         Button(onClick = clickNextBtn, modifier = Modifier.background(Purple40), shape = RoundedCornerShape(5.dp) ) {
-            Text(text = "NEXT", color = Color.White)
+            Text(text = rightButtonText, color = Color.White)
         }
     }
 }

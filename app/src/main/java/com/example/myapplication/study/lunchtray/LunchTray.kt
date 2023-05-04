@@ -69,20 +69,35 @@ fun LunchTrayMainView(lunchTrayViewModel: LunchTrayViewModel, contentPadding: Pa
         }
         composable(route = LunchTrayRoute.Side.name) {
             LunchSideView(
-                navController,
-                lunchTrayViewModel
+                lunchTrayViewModel,
+                clickCancelBtn = {
+                    navController.navigate(LunchTrayRoute.Main.name)
+                },
+                clickNextBtn = {
+                    navController.navigate(LunchTrayRoute.Drink.name)
+                }
             )
         }
         composable(route = LunchTrayRoute.Drink.name) {
             LunchDrinkView(
-                navController,
-                lunchTrayViewModel
+                lunchTrayViewModel,
+                clickCancelBtn = {
+                    navController.navigate(LunchTrayRoute.Side.name)
+                },
+                clickNextBtn = {
+                    navController.navigate(LunchTrayRoute.Purchase.name)
+                }
             )
         }
         composable(route = LunchTrayRoute.Purchase.name) {
             LunchPurchaseView(
-                navController,
-                lunchTrayViewModel
+                lunchTrayViewModel,
+                clickCancelBtn = {
+                    navController.navigate(LunchTrayRoute.Drink.name)
+                },
+                clickNextBtn = {
+                    navController.popBackStack(route = LunchTrayRoute.Drink.name, inclusive = true)
+                }
             )
         }
     }

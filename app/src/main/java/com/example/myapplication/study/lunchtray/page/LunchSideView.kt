@@ -12,18 +12,16 @@ import com.example.myapplication.study.lunchtray.presenter.LunchTrayRoute
 import com.example.myapplication.study.lunchtray.presenter.LunchTrayViewModel
 
 @Composable
-fun LunchSideView(navController: NavController, lunchTrayViewModel: LunchTrayViewModel) {
+fun LunchSideView(lunchTrayViewModel: LunchTrayViewModel, clickCancelBtn: () -> Unit, clickNextBtn: () -> Unit) {
     Column(modifier = Modifier.fillMaxSize()) {
-//        CommonLunchTrayMenuList(
-//            menuList = lunchTrayViewModel.getMenuList(LunchTrayRoute.Main)
-//        ) { lunchMainMenu ->
-//            lunchTrayViewModel.selectMainMenu(lunchMainMenu)
-//        }
-
-        Text(text = "side")
+        CommonLunchTrayMenuList(
+            menuList = lunchTrayViewModel.getMenuList(LunchTrayRoute.Side)
+        ) { lunchMainMenu ->
+            lunchTrayViewModel.selectSideMenu(lunchMainMenu)
+        }
         CommonLunchTrayFooter(
-            clickCancelBtn = { navController.popBackStack() },
-            clickNextBtn = { navController.navigate(LunchTrayRoute.Drink.name) }
+            clickCancelBtn = clickCancelBtn,
+            clickNextBtn = clickNextBtn
         )
     }
 }

@@ -11,7 +11,7 @@ import com.example.myapplication.study.lunchtray.presenter.LunchTrayRoute
 import com.example.myapplication.study.lunchtray.presenter.LunchTrayViewModel
 
 @Composable
-fun LunchMainView(lunchTrayViewModel: LunchTrayViewModel, clickCancelBtn: () -> Unit, clickNextBtn: () -> Unit ) {
+fun LunchMainView(lunchTrayViewModel: LunchTrayViewModel, clickCancelBtn: () -> Unit, clickNextBtn: () -> Unit) {
     Column(modifier = Modifier.fillMaxSize()) {
         CommonLunchTrayMenuList(
             menuList = lunchTrayViewModel.getMenuList(LunchTrayRoute.Main)
