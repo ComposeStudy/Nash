@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
+import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
@@ -17,16 +18,22 @@ import com.example.myapplication.study.artspace.ArtSpaceMainView
 import com.example.myapplication.study.cupcake.CupcakeMainView
 import com.example.myapplication.study.daysofwellness.DaysMain
 import com.example.myapplication.study.lunchtray.LunchTrayMain
-import com.example.myapplication.study.lunchtray.LunchTrayMainView
+import com.example.myapplication.study.sports.SportScreenView
 
 
 @Composable
 fun MainView(
-    mainViewModel: MainViewModel
+    mainViewModel: MainViewModel,
+    windowSize: WindowSizeClass
 ) {
     val selectedPage = mainViewModel.uiState.collectAsState().value
     Log.e("samohao", "MainView state = $selectedPage")
     when (selectedPage) {
+        is DetailPage.SportsPage -> {
+            SportScreenView(mainViewModel.sportsViewModel,windowSize) {
+                mainViewModel.goMainPage()
+            }
+        }
         is DetailPage.LunchTrayPage -> {
             LunchTrayMain(mainViewModel.lunchTrayViewModel) {
                 mainViewModel.goMainPage()
@@ -63,6 +70,8 @@ fun MainPage(mainViewModel: MainViewModel) {
             .fillMaxSize()
             .padding(20.dp)
     ) {
+        TextMenu("Sports", clickMenu = { mainViewModel.selectPage(DetailPage.SportsPage) })
+        Spacer(modifier = Modifier.height(20.dp))
         TextMenu("LunchTray", clickMenu = { mainViewModel.selectPage(DetailPage.LunchTrayPage) })
         Spacer(modifier = Modifier.height(20.dp))
         TextMenu("Cupcake", clickMenu = { mainViewModel.selectPage(DetailPage.CupcakePage) })

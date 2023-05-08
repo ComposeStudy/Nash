@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.material3.windowsizeclass.ExperimentalMaterial3WindowSizeClassApi
+import androidx.compose.material3.windowsizeclass.calculateWindowSizeClass
 import androidx.compose.runtime.*
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.myapplication.study.artspace.presenter.ArtSpaceViewModel
@@ -52,9 +54,11 @@ class MainActivity : ComponentActivity() {
 //        mainViewModel.cupcakeViewModel = cupcakeViewModel
     }
 
+    @OptIn(ExperimentalMaterial3WindowSizeClassApi::class)
     @Preview(showBackground = true)
     @Composable
     fun DefaultPreview() {
-        MainView(mainViewModel = mainViewModel)
+        val windowSize = calculateWindowSizeClass(activity = this)
+        MainView(mainViewModel = mainViewModel, windowSize)
     }
 }
