@@ -1,24 +1,33 @@
 package com.example.myapplication.study.sports
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.windowsizeclass.WindowSizeClass
 import androidx.compose.material3.windowsizeclass.WindowWidthSizeClass
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.example.myapplication.study.sports.presenter.SportsViewModel
-import com.example.myapplication.study.sports.presenter.StateSport
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.myapplication.study.sports.presenter.*
 import com.example.myapplication.study.sports.theme.Pink80
 import com.example.myapplication.study.sports.theme.SportsTheme
+import com.example.myapplication.study.sports.theme.Typography
 
 @Composable
 fun SportScreenView(
@@ -29,10 +38,10 @@ fun SportScreenView(
     val backHandlingEnable by remember { mutableStateOf(false) }
     BackHandler(backHandlingEnable, onBack = backPress)
 
-    val state = sportsViewModel.stateSport.collectAsState().value
+    val uistate = sportsViewModel.stateSport.collectAsState().value
 
     Scaffold(topBar = {
-        SportTop(state = state, windowSize = windowSize)
+        SportTop(uistate = uistate, windowSize = windowSize)
     }) { padding ->
         SportsTheme {
             SportsMain(
@@ -45,29 +54,23 @@ fun SportScreenView(
 }
 
 @Composable
-fun SportTop(state: StateSport, windowSize: WindowSizeClass) {
+fun SportTop(uistate: SportStateData, windowSize: WindowSizeClass) {
     var hasBack = false
     var title = "LIST"
-    when (state) {
-        is StateSport.Detail -> {
-            hasBack = true
-            title = "DETAIL"
-
-        }
-        else -> {}
-    }
     when (windowSize.widthSizeClass) {
         WindowWidthSizeClass.Expanded -> {
             hasBack = true
-            title = "DETAIL"
+            title = if (uistate.state == StateSport.ListAndDetail) "LIST AND DETAIL" else "DETAIL"
         }
-        else -> {}
+        else -> {
+            hasBack = true
+            title = if (uistate.state == StateSport.List) "LIST" else "DETAIL"
+        }
     }
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .height(50.dp)
-            .padding(horizontal = 50.dp)
             .background(color = Pink80),
         horizontalArrangement = Arrangement.spacedBy(20.dp)
     ) {
@@ -83,48 +86,90 @@ fun SportsMain(
     sportsViewModel: SportsViewModel
 ) {
 
-//    when (state) {
-//        is StateSport.Start -> {
-//
-//        }
-//        is StateSport.List -> {
-//
-//        }
-//        is StateSport.Detail -> {
-//
-//        }
-//    }
-
+    val navController = rememberNavController()
+    val listSport = sportsViewModel.getSportList()
+    val eventState = sportsViewModel.stateSport.collectAsState().value
     when (windowSize.widthSizeClass) {
-        WindowWidthSizeClass.Compact -> {
-            SportsList(padding = padding)
-        }
-        WindowWidthSizeClass.Medium -> {
-            SportsList(padding = padding)
+        WindowWidthSizeClass.Compact, WindowWidthSizeClass.Medium -> {
+            NavHost(
+                navController = navController,
+                startDestination = SportRoute.LIST.name,
+            ) {
+                composable(SportRoute.LIST.name) {
+                    SportsList(padding = padding, listSport = listSport)
+                }
+                composable(SportRoute.DETAIL.name) {
+                    SportsDetail(itemSport = eventState.)
+                }
+            }
         }
         WindowWidthSizeClass.Expanded -> {
-            SportsListAndDetail(padding)
+            SportsListAndDetail(padding, listSport = listSport)
         }
     }
 }
 
 @Composable
-fun SportsList(modifier: Modifier = Modifier, padding: PaddingValues) {
-    Column(
+fun SportsList(
+    modifier: Modifier = Modifier,
+    padding: PaddingValues = PaddingValues(0.dp),
+    listSport: List<SportItem>
+) {
+    LazyColumn(
         modifier = modifier
             .fillMaxWidth()
-            .background(color = Color.Red)
             .padding(padding)
     ) {
-        Text(text = "List")
+        items(listSport) { sportItem ->
+            SportItemView(sportItem = sportItem)
+        }
     }
 }
 
 @Composable
-fun SportsDetail(modifier: Modifier = Modifier, padding: PaddingValues) {
+fun SportItemView(sportItem: SportItem, clickItem: () -> Unit) {
+    Surface(
+        modifier = Modifier
+            .padding(all = 10.dp)
+            .clickable(onClick = clickItem),
+        shadowElevation = 5.dp
+    ) {
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(10.dp),
+            modifier = Modifier.background(color = Color.White)
+        ) {
+            Image(
+                painter = painterResource(id = sportItem.imgList),
+                modifier = Modifier.size(150.dp),
+                contentDescription = "baseball",
+                contentScale = ContentScale.Fit
+            )
+            Column(
+                modifier = Modifier
+                    .height(150.dp)
+                    .weight(1f)
+            ) {
+                Spacer(modifier = Modifier.height(15.dp))
+                Text(text = sportItem.name, style = Typography.titleLarge)
+                Spacer(modifier = Modifier.height(15.dp))
+                Text(text = "News", style = Typography.labelLarge)
+                Spacer(modifier = Modifier.height(15.dp))
+                Text(text = sportItem.desc, style = Typography.bodyMedium)
+                Spacer(modifier = Modifier.height(10.dp))
+            }
+        }
+    }
+}
+
+@Composable
+fun SportsDetail(
+    modifier: Modifier = Modifier,
+    padding: PaddingValues = PaddingValues(0.dp),
+    itemSport: SportItem
+) {
     Column(
         modifier = modifier
-            .fillMaxWidth()
+            .fillMaxSize()
             .background(color = Color.Blue)
             .padding(padding)
     ) {
@@ -133,12 +178,21 @@ fun SportsDetail(modifier: Modifier = Modifier, padding: PaddingValues) {
 }
 
 @Composable
-fun SportsListAndDetail(padding: PaddingValues) {
+fun SportsListAndDetail(padding: PaddingValues, listSport: List<SportItem>, sportsViewModel: SportsViewModel) {
+    val clickDetail = sportsViewModel.stateSport.collectAsState().value
+    when (clickDetail) {
+        is StateSport.List -> {
+
+        }
+        is StateSport.Detail -> {
+
+        }
+    }
     Row {
         val weight = Modifier
             .weight(1f)
             .padding(padding)
-        SportsList(weight, padding = padding)
-        SportsDetail(weight, padding = padding)
+        SportsList(weight, listSport = listSport)
+        SportsDetail(weight, listSport = listSport)
     }
 }

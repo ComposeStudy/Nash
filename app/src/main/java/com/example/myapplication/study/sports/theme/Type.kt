@@ -58,7 +58,7 @@ val Typography = Typography(
         fontSize = 20.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.5.sp,
-//        color = Grey300,
+        color = PurpleGrey40,
         fontStyle = FontStyle.Italic
     ),
     bodyLarge = TextStyle(
@@ -72,8 +72,8 @@ val Typography = Typography(
     bodyMedium = TextStyle(
         fontFamily = Montserrat,
         fontWeight = FontWeight.Black,
-        fontSize = 16.sp,
-        lineHeight = 24.sp,
+        fontSize = 12.sp,
+        lineHeight = 12.sp,
         letterSpacing = 0.5.sp,
         fontStyle = FontStyle.Italic
     )
