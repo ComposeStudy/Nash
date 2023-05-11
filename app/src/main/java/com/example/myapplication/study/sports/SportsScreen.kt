@@ -75,8 +75,12 @@ fun SportTop(sportsViewModel: SportsViewModel, windowSize: WindowSizeClass, clic
             }
         }
         else -> {
-            hasBack = true
-            title = if (sportState.screenState == StateScreen.List) "LIST" else "DETAIL"
+            if (sportState.screenState == StateScreen.List) {
+                title = "LIST"
+            } else {
+                title = "DETAIL"
+                hasBack = true
+            }
         }
     }
     Row(
