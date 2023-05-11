@@ -10,13 +10,18 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class SportsViewModel : ViewModel() {
-    private val _sportState = MutableStateFlow(SportStateData())
+    private val _sportState = MutableStateFlow(SportState())
     val stateSport = _sportState.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(5000),
-        initialValue = SportStateData()
+        initialValue = SportState()
     )
+    private val _notSelect = -1
     fun getSportList() = listSport
+    fun getSportItem(): SportItem {
+        val index = _sportState.value.preDetailIndex
+        return if (index > listSport.size || index == -1) listSport[0] else listSport[index]
+    }
 
     fun eventHandler(event: EventSport) {
         viewModelScope.launch {
@@ -25,19 +30,37 @@ class SportsViewModel : ViewModel() {
                     _sportState.update {
                         it.copy(
                             detailIndex = event.index,
-                            preDetailIndex = it.detailIndex,
-                            detailItem = event.item
+                            preDetailIndex = event.index,
+                            detailItem = event.item,
+                            screenState = if (it.screenState == StateScreen.List) StateScreen.Detail else it.screenState
                         )
                     }
                 }
                 is EventSport.ClickNavBack -> {
-
+                    _sportState.update {
+                        it.copy(
+                            screenState = if (it.screenState == StateScreen.Detail) StateScreen.List else it.screenState
+                        )
+                    }
                 }
                 is EventSport.WindowSizeExpanded -> {
                     _sportState.update {
                         it.copy(
-                            detailIndex = event.data.detailIndex,
-                            d
+                            screenState = if (it.screenState != StateScreen.ListAndDetail) StateScreen.ListAndDetail else it.screenState
+                        )
+                    }
+                }
+                is EventSport.WindowSizeNormal -> {
+                    _sportState.update {
+                        it.copy(
+                            screenState = if (it.screenState == StateScreen.ListAndDetail) {
+                                if (it.preDetailIndex != _notSelect)
+                                    StateScreen.Detail
+                                else
+                                    StateScreen.List
+                            } else {
+                                it.screenState
+                            }
                         )
                     }
                 }
@@ -49,22 +72,22 @@ class SportsViewModel : ViewModel() {
 sealed interface EventSport {
     data class ClickSport(val item: SportItem, val index: Int): EventSport
     object ClickNavBack: EventSport
-    data class WindowSizeExpanded(val data: SportStateData): EventSport
-    data class WindowSizeNormal(val data: SportStateData): EventSport
+    object WindowSizeExpanded: EventSport
+    object WindowSizeNormal: EventSport
 }
 
-sealed interface StateSport {
+sealed interface StateScreen {
 
-    object List: StateSport
+    object List: StateScreen
 
-    object Detail: StateSport
+    object Detail: StateScreen
 
-    object ListAndDetail: StateSport
+    object ListAndDetail: StateScreen
 }
 
-data class SportStateData(
-    val state: StateSport = StateSport.List,
-    val listSport: List<SportItem> = listOf(),
+data class SportState(
+    val screenState: StateScreen = StateScreen.List,
+    val list: List<SportItem> = listSport,
     val detailItem: SportItem = SportItem(),
     val detailIndex: Int = -1,
     val preDetailIndex: Int = -1
